@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="">Name</label>
+    <input type="text">
+    <label for="">EmailId</label>
+    <input type="text">
+    <label for="">Phone Number</label>
+    <input type="text">
+    <button>Submit</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+<script>
+    function saveToLocalStorage(event){
+        event.preventDefault();
+        const name = event.target.username.value;
+        const email = event.target.username.value;
+        const phonenumber = event.target.username.value;
+    const obj = {
+        name,
+        email,
+        phonenumber
+    }
+    axios.post("https://crudcrud.com/api/5113977a47c541d794310986c18d6f13/AppointmentData")
+    .then((respone)=>{
+        console.log(respone)
+    })
+    .catch((err) =>{
+        console.log(err)
+    })
+   // localStorage.setItem(obj.email,JSON.stringify(obj))
+    showNewUserOnscreen(obj)
+    }
+    window.addEventListener("DOMContentLoaded", () =>{
+        const localSorageObj = localStorage;
+        const localstoragekeys = Object.keys(localStorageObj)
+        for(var i=0;i<localstoragekeys.length;i++){
+            const key = localstoragekeys[i]
+            const userDetailsString = localStorageObj[key];
+            const userDetailsObj = JSON.parse(userDetailsString);
+            showNewUserOnScreen(userDetailsObj)
+        }
+    })
+</script>
+    
+</body>
+</html> 
